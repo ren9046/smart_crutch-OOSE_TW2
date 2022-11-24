@@ -9,6 +9,6 @@ public interface UserSevice {
     @POST("EmergencyContact/login")
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
 
-    @POST("EmergencyContact/create/")
+    @POST("EmergencyContact/create")
     Call<RegisterResponse> registerUser(@Body RegisterRequest registerRequset);
 }

@@ -40,7 +40,7 @@ public class page_emergency_input extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.tw2ver01.MESSAGE";
     public static final String EXTRA_MESSAGE1 = "com.example.tw2ver01.MESSAGE";
     public static final String EXTRA_MESSAGE2 = "com.example.tw2ver01.MESSAGE";
-    private String http="https://c05b-2001-b011-b800-d21e-c0d0-aa95-1cdf-229d.ngrok.io";
+    private String http="http://20.194.172.51";
     OkHttpClient client = new OkHttpClient().newBuilder().build();
 
     @Override

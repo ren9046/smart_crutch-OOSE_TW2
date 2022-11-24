@@ -68,7 +68,7 @@ public class page_heartbeat extends AppCompatActivity {
                         @Override
                         protected String doInBackground(Void... voids) {
                             Request request = new Request.Builder()
-                                    .url("https://c05b-2001-b011-b800-d21e-c0d0-aa95-1cdf-229d.ngrok.io/api/HeartBeat/now/1")
+                                    .url("http://20.194.172.51/api/HeartBeat/now/1")
                                     .build();
 
                             try (Response response = client.newCall(request).execute()) {

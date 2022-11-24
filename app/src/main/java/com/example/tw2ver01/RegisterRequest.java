@@ -1,11 +1,15 @@
 package com.example.tw2ver01;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class RegisterRequest {
+    private JSONObject data = new JSONObject();
 
     private String contactPerson;//聯絡人
     private String email;
     private String password;
-    private String contactNo;//電話
+    private String contactNumber;//電話
     private String relationship;//稱謂
     private Long deviceCode;
 
@@ -34,11 +38,11 @@ public class RegisterRequest {
     }
 
     public String getContactNo() {
-        return contactNo;
+        return contactNumber;
     }
 
     public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
+        this.contactNumber = contactNo;
     }
 
     public String getRelationship() {
@@ -54,4 +58,18 @@ public class RegisterRequest {
 
         this.deviceCode = deviceCode;
     }
+/* for debug use
+    public JSONObject getJsonString() {
+        try {
+        data.put("contactNumber", contactNumber.toString());
+        data.put("contactPerson", contactPerson.toString());
+        data.put("deviceCode", deviceCode.toString());
+        data.put("email", email.toString());
+        data.put("password", password.toString());
+        data.put("relationship", relationship.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }*/
 }

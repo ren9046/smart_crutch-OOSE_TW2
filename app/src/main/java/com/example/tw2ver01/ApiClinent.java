@@ -11,7 +11,7 @@ public class ApiClinent {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://c05b-2001-b011-b800-d21e-c0d0-aa95-1cdf-229d.ngrok.io/api/")
+                .baseUrl("http://20.194.172.51/api/")
                 .client(okHttpClient)
                 .build();
         return retrofit;

@@ -52,40 +52,40 @@ public class page_register extends AppCompatActivity {
                     registerRequest.setContactPerson(rusername.getText().toString());
                     registerRequest.setRelationship(rcall.getText().toString());
                     registerRequest.setContactNo(rphone.getText().toString());
-
                     registerRequest.setDeviceCode(Long.valueOf(rdeviceCode.getText().toString()));
+                    //System.out.println(registerRequest.getJsonString());
 
-//                    registerUser(registerRequest);
+                    registerUser(registerRequest);
                 }
             }
         });
     }
 
-//    public void registerUser(RegisterRequest registerRequest){
-//        Call<RegisterResponse> registerResponseCall = ApiClinent.getService().registerUser(registerRequest);
-//        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-//
-//                if(response.isSuccessful()){
-////                    String message = "Successful ..";
-//                    Toast.makeText(page_register.this, "Successful ..",Toast.LENGTH_LONG).show();
-//
-//                    startActivity(new Intent(page_register.this,page_login.class));
-//                    finish();
-//
-//                }else{
-//                    String message = "An error occurred please try again later ...";
-//                    Toast.makeText(page_register.this,message,Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<RegisterResponse> call, Throwable t) {
-//                String message = t.getLocalizedMessage();
-//                Toast.makeText(page_register.this,message,Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
+    public void registerUser(RegisterRequest registerRequest){
+        Call<RegisterResponse> registerResponseCall = ApiClinent.getService().registerUser(registerRequest);
+        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+
+                if(response.isSuccessful()){
+                    String message = "Successful ..";
+                    Toast.makeText(page_register.this, "Successful ..",Toast.LENGTH_LONG).show();
+
+                    startActivity(new Intent(page_register.this,page_login.class));
+                    finish();
+
+                }else{
+                    String message = "An error occurred please try again later ...";
+                    Toast.makeText(page_register.this,message,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(page_register.this,message,Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
