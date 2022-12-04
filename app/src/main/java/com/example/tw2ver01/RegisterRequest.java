@@ -10,7 +10,7 @@ public class RegisterRequest {
     private String email;
     private String password;
     private String contactNumber;//電話
-    private String relationship;//稱謂
+    private String LineToken;//LineToken
     private Long deviceCode;
 
     public String getContactPerson() {
@@ -45,12 +45,10 @@ public class RegisterRequest {
         this.contactNumber = contactNo;
     }
 
-    public String getRelationship() {
-        return relationship;
-    }
+    public String getLineToken() { return LineToken;}
 
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
+    public void setLineToken(String LineToken) {
+        this.LineToken = LineToken;
     }
 
 

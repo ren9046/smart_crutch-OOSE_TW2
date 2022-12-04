@@ -13,7 +13,7 @@ public class RegisterResponse {
     private String email;
     private String password;
     private String contactNo;//電話
-    private String relationship;//稱謂
+    private String LineToken;//稱謂
     private  String deviceCode;
 
     public String getContactPerson() {
@@ -48,12 +48,12 @@ public class RegisterResponse {
         this.contactNo = contactNo;
     }
 
-    public String getRelationship() {
-        return relationship;
+    public String getLineToken() {
+        return LineToken;
     }
 
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
+    public void setLineToken(String LineToken) {
+        this.LineToken = LineToken;
     }
 
     public String getDeviceCode() {

@@ -128,7 +128,7 @@
         android:layout_marginStart="87dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="15dp"
-        android:text="稱謂:"
+        android:text="LineToken:"
         app:layout_constraintEnd_toStartOf="@+id/rcall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rusername" />

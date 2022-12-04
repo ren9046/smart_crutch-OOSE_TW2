@@ -50,7 +50,7 @@ public class page_register extends AppCompatActivity {
                     registerRequest.setEmail(riptmail.getText().toString());
                     registerRequest.setPassword(riptpwd.getText().toString());
                     registerRequest.setContactPerson(rusername.getText().toString());
-                    registerRequest.setRelationship(rcall.getText().toString());
+                    registerRequest.setLineToken(rcall.getText().toString());
                     registerRequest.setContactNo(rphone.getText().toString());
                     registerRequest.setDeviceCode(Long.valueOf(rdeviceCode.getText().toString()));
                     //System.out.println(registerRequest.getJsonString());
