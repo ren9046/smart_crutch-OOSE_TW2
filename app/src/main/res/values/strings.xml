@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">TW2 ver0.1</string>
-    <string name="title_activity_page_maps">page_MapsActivity</string>
-    <string name="title_activity_page_maps1">page_maps1</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <string name="login">Login</string>
-</resources>
