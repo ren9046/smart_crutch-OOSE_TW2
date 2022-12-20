@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TW2 ver0.1</string>
+    <string name="title_activity_page_maps">page_MapsActivity</string>
+    <string name="title_activity_page_maps1">page_maps1</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="login">登入</string>
+    <string name="real_time_image">即时影像</string>
+    <string name="heartbeat_detection">心跳侦测</string>
+    <string name="real_time_positioning">即时位置</string>
+    <string name="Follow_the_system">跟随系统</string>
+    <string name="lan_zh_rTW">繁体中文</string>
+    <string name="lan_en_US">英文</string>
+    <string name="lan_ko_rKR">韩文</string>
+    <string name="lan_zh_CN">简体中文</string>
+    <string name="select_language">选择一种语言</string>
+    <string name="language">语言</string>
+    <string name="createAccount">注册</string>
+    <string name="Account">帐号</string>
+    <string name="Password">密码</string>
+    <string name="view_live_images">查看即时影像</string>
+</resources>
