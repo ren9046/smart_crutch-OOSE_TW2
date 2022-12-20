@@ -26,12 +26,14 @@
         android:id="@+id/createAcc"
         android:layout_width="164dp"
         android:layout_height="18dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="284dp"
-        android:text="CREATE ACCOUNT"
+        android:text="@string/createAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnlogin" />
 
     <EditText
         android:id="@+id/inputemail"
@@ -53,7 +55,7 @@
         android:layout_marginStart="49dp"
         android:layout_marginTop="260dp"
         android:layout_weight="1"
-        android:text="帳號："
+        android:text="@string/Account"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_weight="1"
-        android:text="密碼："
+        android:text="@string/Password"
 
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -118,5 +120,19 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnlng"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="235dp"
+        android:text="@string/language"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAcc" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

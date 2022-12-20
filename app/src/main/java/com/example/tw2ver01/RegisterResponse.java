@@ -2,13 +2,6 @@ package com.example.tw2ver01;
 
 public class RegisterResponse {
 
-//    private int id;
-//    private String username;
-//    private String email;
-//    private String phone;
-//    private String call;
-
-
     private String contactPerson;//聯絡人
     private String email;
     private String password;

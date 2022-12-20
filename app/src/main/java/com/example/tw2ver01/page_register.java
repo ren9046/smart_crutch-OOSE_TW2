@@ -10,6 +10,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tw2ver01.RegisterVerification.Context;
+import com.example.tw2ver01.RegisterVerification.emailFrontStringExpression;
+import com.example.tw2ver01.RegisterVerification.emailRearStringExpression;
+import com.example.tw2ver01.RegisterVerification.passwordStringExpression;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,6 +40,48 @@ public class page_register extends AppCompatActivity {
         rcall = findViewById(R.id.rcall);
         rdeviceCode = findViewById(R.id.rdeviceCode);
 
+        //信箱欄位監聽
+        riptmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    Context emailadd = new Context(riptmail.getText().toString());
+                    emailFrontStringExpression frontStringExp = new emailFrontStringExpression();
+                    emailRearStringExpression rearStringExp = new emailRearStringExpression();
+                    if (frontStringExp.interpret(emailadd.getContext()) == false && rearStringExp.interpret(emailadd.getContext()) == false) {
+                        System.out.println("沒有加上@");
+                        Toast.makeText(page_register.this, "沒有加上@", Toast.LENGTH_SHORT).show();
+                    } else if (frontStringExp.interpret(emailadd.getContext()) == false) {
+                        System.out.println("@前面必須是英文加數字");
+                        Toast.makeText(page_register.this, "@前面必須是英文加數字", Toast.LENGTH_SHORT).show();
+                    } else if (rearStringExp.interpret(emailadd.getContext()) == false) {
+                        System.out.println("@後面必須是 英文數字.英文數字(.英文數字)");
+                        Toast.makeText(page_register.this, "@後面必須是 英文數字.英文數字(.英文數字)", Toast.LENGTH_SHORT).show();
+                    } else {
+                        System.out.println("@後面必須是 英文數字.英文數字(.英文數字)");
+                        Toast.makeText(page_register.this, "信箱格式正確", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        //密碼欄位監聽
+        riptpwd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    Context passwordadd = new Context(riptpwd.getText().toString());
+                    passwordStringExpression passwordExp = new passwordStringExpression();
+                    if (passwordExp.interpret(passwordadd.getContext()) == false) {
+                        System.out.println("密碼格式錯誤，須為英文數字6至10位元");
+                        Toast.makeText(page_register.this, "密碼格式錯誤，須為英文數字6至10位元", Toast.LENGTH_SHORT).show();
+                    } else {
+                        System.out.println("密碼格式正確");
+                        Toast.makeText(page_register.this, "密碼格式正確", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
 
         rbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +100,6 @@ public class page_register extends AppCompatActivity {
                     registerRequest.setLineToken(rcall.getText().toString());
                     registerRequest.setContactNo(rphone.getText().toString());
                     registerRequest.setDeviceCode(Long.valueOf(rdeviceCode.getText().toString()));
-                    System.out.println(registerRequest.getJsonString());
 
                     registerUser(registerRequest);
                 }
@@ -69,7 +115,6 @@ public class page_register extends AppCompatActivity {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
 
                 if (response.isSuccessful()) {
-                    //String message = "Successful ..";
                     Toast.makeText(page_register.this, "Successful ..", Toast.LENGTH_LONG).show();
 
                     startActivity(new Intent(page_register.this, page_login.class));

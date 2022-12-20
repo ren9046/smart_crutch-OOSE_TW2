@@ -46,6 +46,7 @@
             android:name=".MainActivity"
             android:exported="false"></activity>
         <activity android:name=".page_heartbeat" />
+        <activity android:name=".page_chart" />
         <activity
             android:name=".page_maps1"
             android:exported="true"

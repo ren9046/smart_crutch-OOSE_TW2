@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tw2ver01.Image.ProxyImage;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,12 +26,17 @@ public class page_Liveimage extends AppCompatActivity {
     public Button btnimg;
     OkHttpClient client = new OkHttpClient();
     ImageView imageView;
+    ProxyImage proxyimg = new ProxyImage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_liveimage);
         imageView = findViewById(R.id.imageView);
+        //Set the default image
+        proxyimg.setImage();
+        imageView.setImageResource(proxyimg.getImage());
+
         btnimg = findViewById(R.id.button2);
         btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,8 +45,9 @@ public class page_Liveimage extends AppCompatActivity {
 
                     @Override
                     protected Bitmap doInBackground(Void... voids) {
+                        //Obtain real-time images
                         Request request = new Request.Builder()
-                                .url("http://20.194.172.51/api/Image/now/1")
+                                .url(proxyimg.LoadLiveImage())
                                 .build();
 
                         try (Response response = client.newCall(request).execute()) {

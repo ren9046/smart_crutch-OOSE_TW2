@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.tw2ver01.Alert.MapAlert;
 import com.example.tw2ver01.databinding.ActivityPageMaps1Binding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +29,7 @@ public class page_maps1 extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityPageMaps1Binding binding;
     private Double longitude, latitude;
-    private String http = "http://20.194.172.51";
+    private final String http = "http://20.194.172.51";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,14 @@ public class page_maps1 extends FragmentActivity implements OnMapReadyCallback {
         binding = ActivityPageMaps1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        Bundle bundle0311 =this.getIntent().getExtras();
 //         Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //template start
+        MapAlert mapAlert = new MapAlert(this);
+        mapAlert.AlertDialog();
+        //template end
     }
 
     /**
@@ -62,7 +66,7 @@ public class page_maps1 extends FragmentActivity implements OnMapReadyCallback {
             @Override
             protected Void doInBackground(Void... Void) {
                 Request request = new Request.Builder()
-                        .url(http + "/api/Gps/now/1")
+                        .url(http + "/api/Gps/now/" + Device.getDeviceCode())
                         .build();
                 try (Response response = client.newCall(request).execute()) {
                     if (response.code() == 200) {

@@ -1,16 +1,22 @@
 package com.example.tw2ver01;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.tw2ver01.Language.BaseActivity;
+import com.example.tw2ver01.Language.Config;
+import com.example.tw2ver01.Language.LanguageUtils;
+import com.example.tw2ver01.Language.Store;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,13 +30,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class page_login extends AppCompatActivity {
+public class page_login extends BaseActivity {
     Button btnlogin;
     EditText inputemail, inputpwd;
     TextView createAcc;
     private Handler handler = null;
-    private boolean info;
-    OkHttpClient client = new OkHttpClient().newBuilder().build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,6 @@ public class page_login extends AppCompatActivity {
         inputemail = findViewById(R.id.inputemail);
         inputpwd = findViewById(R.id.inputpwd);
         createAcc = findViewById(R.id.createAcc);
-        Bundle bundle = this.getIntent().getExtras();
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,22 +53,19 @@ public class page_login extends AppCompatActivity {
             }
         });
         btnlogin.setOnClickListener(new View.OnClickListener() {
-            private String pwd;
-            private String email;
-            private String value;
 
             @Override
             public void onClick(View v) {
 
                 class login extends AsyncTask<Void, Void, String> {
-                    OkHttpClient client = new OkHttpClient();
+                    final OkHttpClient client = new OkHttpClient();
 
                     @Override
                     protected String doInBackground(Void... voids) {
                         String result = null;
                         JSONObject jsonObject = new JSONObject();
-                        EditText inputemail = (EditText) findViewById(R.id.inputemail);
-                        EditText inputpwd = (EditText) findViewById(R.id.inputpwd);
+                        EditText inputemail = findViewById(R.id.inputemail);
+                        EditText inputpwd = findViewById(R.id.inputpwd);
                         try {
 
                             jsonObject.put("email", inputemail.getText().toString());
@@ -91,7 +91,7 @@ public class page_login extends AppCompatActivity {
                                 JSONObject data = jsonObject.getJSONObject("deviceCode");
                                 long devicecode = data.getLong("deviceCode");
                                 boolean bind = data.getBoolean("bind");
-//                                String email=
+                                Device.setDeviceCode(devicecode);
                                 if (bind == false) {
                                     OkHttpClient client = new OkHttpClient();
                                     jsonObject = new JSONObject();
@@ -105,17 +105,15 @@ public class page_login extends AppCompatActivity {
                                     MediaType a = MediaType.parse("application/json; charset=utf-8");
                                     RequestBody b = RequestBody.create(jsonObject.toString(), a);
                                     Request re = new Request.Builder()
-                                            .url("http://20.194.172.51/api/Device/create/1")
+                                            .url("http://20.194.172.51/api/Device/create/" + Device.getDeviceCode())
                                             .method("PATCH", b)
                                             .build();
                                     try (Response rp = client.newCall(re).execute()) {
                                         if (rp.code() == 200) {
-
                                             String result1 = rp.body().string();
-                                            jsonObject = new JSONObject(result1);
                                             System.out.println(result1);
                                         }
-                                    } catch (IOException | JSONException e) {
+                                    } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                 }
@@ -140,103 +138,37 @@ public class page_login extends AppCompatActivity {
                 }
                 new login().execute();
 
-                new Thread(new Runnable() {
+            }
+        });
+        final String[] cities = {getString(R.string.lan_en_US), getString(R.string.lan_ko_rKR), getString(R.string.lan_zh_rTW), getString(R.string.lan_zh_CN), getString(R.string.Follow_the_system)};
+        final String[] locals = {"en_US", "ko_KR", "zh_TW", "zh_CN", "111"};
+        Button btnlng = findViewById(R.id.btnlng);
+        btnlng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(page_login.this);
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setTitle(R.string.select_language);
+                builder.setItems(cities, new DialogInterface.OnClickListener() {
                     @Override
-
-                    public void run() {
-
-                        while (true) {
-                            // write code
-
-                            class sostrg extends AsyncTask<Void, Void, Boolean> {
-                                @Override
-                                protected Boolean doInBackground(Void... voids) {
-                                    Request request = new Request.Builder()
-                                            .url("http://20.194.172.51/api/Gps/sostrigger/1")
-                                            .build();
-
-                                    try (Response response = client.newCall(request).execute()) {
-                                        if (response.code() == 200) {
-                                            String result = response.body().string();
-                                            JSONObject jsonObject = new JSONObject(result);
-                                            info = jsonObject.getBoolean("sosInfo");
-                                            System.out.println(info);
-                                            return info;
-                                        }
-                                    } catch (IOException | JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    return info;
-                                }
-
-                                protected void onPostExecute(String result) {
-
-                                }
-                            }
-
-
-                            new sostrg().execute();
-
-                            try {
-                                Thread.sleep(30000);
-
-                            } catch (InterruptedException e) {
-
-                                e.printStackTrace();
-
-                            }
+                    public void onClick(DialogInterface dialog, int which) {
+                        String language = null;
+                        if (which == 4) {
+                            language = LanguageUtils.getCurrentLanguage();
+                            Log.e(TAG, "onClick: language   --- >" + language);
+                        } else {
+                            language = locals[which];
                         }
+                        Store.setLanguageLocal(page_login.this, language);
+                        Intent intent = new Intent(Config.ACTION);
+                        intent.putExtra("msg", "EVENT_REFRESH_LANGUAGE");
+                        sendBroadcast(intent);
+
                     }
-
-                }).start();
-
+                });
+                builder.show();
             }
         });
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

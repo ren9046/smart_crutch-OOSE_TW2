@@ -4,4 +4,19 @@
     <string name="title_activity_page_maps1">page_maps1</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="login">Login</string>
+    <string name="real_time_image">real-time image</string>
+    <string name="heartbeat_detection">heartbeat detection</string>
+    <string name="real_time_positioning">real-time positioning</string>
+    <string name="select_language">Choose a language</string>
+    <string name="lan_zh_rTW">Chinese Traditional</string>
+    <string name="Follow_the_system">Follow the system</string>
+    <string name="lan_en_US">English</string>
+    <string name="lan_ko_rKR">Korean</string>
+    <string name="language">Language</string>
+    <string name="lan_zh_CN">Chinese Simplified</string>
+    <string name="createAccount">CreateAccount</string>
+    <string name="Account">Account</string>
+    <string name="Password">Password</string>
+    <string name="view_live_images">View live images</string>
+
 </resources>
