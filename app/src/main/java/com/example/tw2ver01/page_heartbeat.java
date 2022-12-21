@@ -24,13 +24,8 @@ public class page_heartbeat extends AppCompatActivity {
     private TextView heartoutcome;
     private GetHeartBeatValue getHeartBeat;
 
-    private void ini() {
-        var();
-    }
-
     private void var() {
         value = ("");
-        Handler handler = null;
         heartoutcome = null;
     }
 

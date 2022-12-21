@@ -36,8 +36,6 @@ public class page_maps1 extends FragmentActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         binding = ActivityPageMaps1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-//        Bundle bundle0311 =this.getIntent().getExtras();
 //         Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

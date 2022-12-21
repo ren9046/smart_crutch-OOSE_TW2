@@ -37,7 +37,6 @@ public class page_chart extends AppCompatActivity {
         setContentView(R.layout.activity_page_chart); //取得介面
         chart = findViewById(R.id.lineChart);  //取得圖表
         new heartvalueget().execute();
-        FlyweightFactory factory = new FlyweightFactory();
         Chart chart = (Chart) FlyweightFactory.getShape("chart");
         chart.draw();
 
@@ -77,7 +76,6 @@ public class page_chart extends AppCompatActivity {
                     return "第" + Math.round(value) + "筆";
                 }
             });
-            //
             YAxis y = chart.getAxisLeft();
             y.setTextColor(Color.BLACK);
             y.setDrawGridLines(true);

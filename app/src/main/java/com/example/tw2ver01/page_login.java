@@ -14,10 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tw2ver01.Alert.LoginAlert;
-import com.example.tw2ver01.Language.BaseActivity;
-import com.example.tw2ver01.Language.Config;
-import com.example.tw2ver01.Language.LanguageUtils;
-import com.example.tw2ver01.Language.Store;
+import com.example.tw2ver01.Language.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,9 +32,7 @@ public class page_login extends BaseActivity {
     Button btnlogin;
     EditText inputemail, inputpwd;
     TextView createAcc;
-    OkHttpClient client = new OkHttpClient().newBuilder().build();
     private Handler handler = null;
-    //private boolean info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +43,6 @@ public class page_login extends BaseActivity {
         inputemail = findViewById(R.id.inputemail);
         inputpwd = findViewById(R.id.inputpwd);
         createAcc = findViewById(R.id.createAcc);
-        //Bundle bundle = this.getIntent().getExtras();
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,9 +51,6 @@ public class page_login extends BaseActivity {
             }
         });
         btnlogin.setOnClickListener(new View.OnClickListener() {
-            private String pwd;
-            private String email;
-            private String value;
 
             @Override
             public void onClick(View v) {
@@ -99,7 +90,6 @@ public class page_login extends BaseActivity {
                                 long devicecode = data.getLong("deviceCode");
                                 boolean bind = data.getBoolean("bind");
                                 Device.setDeviceCode(devicecode);
-//                                String email=
                                 if (bind == false) {
                                     OkHttpClient client = new OkHttpClient();
                                     jsonObject = new JSONObject();
@@ -120,10 +110,9 @@ public class page_login extends BaseActivity {
                                         if (rp.code() == 200) {
 
                                             String result1 = rp.body().string();
-                                            jsonObject = new JSONObject(result1);
                                             System.out.println(result1);
                                         }
-                                    } catch (IOException | JSONException e) {
+                                    } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                 }
@@ -150,7 +139,7 @@ public class page_login extends BaseActivity {
                                 }, 1500);
                             }
                         } else {
-                            String message = "密碼錯誤";
+                            String message = "帳號或密碼有誤";
                             Toast.makeText(page_login.this, message, Toast.LENGTH_LONG).show();
                         }
                     }

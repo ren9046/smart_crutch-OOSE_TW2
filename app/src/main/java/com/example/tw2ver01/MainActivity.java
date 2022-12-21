@@ -12,12 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tw2ver01.ButtonFunction.Command;
-import com.example.tw2ver01.ButtonFunction.btngpsCommand;
-import com.example.tw2ver01.ButtonFunction.hebtbtnCommand;
-import com.example.tw2ver01.ButtonFunction.liveCommand;
-import com.example.tw2ver01.State.HandLeavingAlert_State;
-import com.example.tw2ver01.State.WorkingState;
+import com.example.tw2ver01.ButtonFunction.*;
+import com.example.tw2ver01.State.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     LoginResponse loginResponse;
     Button live, btngps, hebtbtn, stopbtn;
     public static HandLeavingAlert_State state = new WorkingState();
-    public static String token = null;
     private static TextView timeleft;
     private static TextView countdown;
     private static Timer timer;
@@ -53,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                         time--;
                     } else {
                         System.out.println("time out");
-                        //Toast.makeText(MainActivity.this, "倒计时完成", Toast.LENGTH_SHORT).show();
                         if (timer != null) {
                             OkHttpClient client = new OkHttpClient();
                             JSONObject jsonObject = new JSONObject();
@@ -104,17 +98,14 @@ public class MainActivity extends AppCompatActivity {
             if (state.getStateType() == "Working") {
                 if (isStop != 1) { //還沒有按下Stop
                     state.switchState();//change to Warning state
-                    //if (timer == null) {
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
 
                         @Override
                         public void run() {
-                            // TODO Auto-generated method stub
                             mHandler.sendEmptyMessage(MSG_WHAT);
                         }
                     }, 0, 1000);
-                    //}
                 }
             }
         }
@@ -203,17 +194,5 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Tag", "=====>" + loginResponse.getEmail());
         }
     }
-
-
-    final Handler hand1 = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                Toast.makeText(getApplicationContext(), "登入成功", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "登入失敗", Toast.LENGTH_LONG).show();
-            }
-        }
-    };
 }
 

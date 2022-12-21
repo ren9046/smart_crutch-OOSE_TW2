@@ -4,16 +4,8 @@ public class Device {
     private static long deviceCode;
     private boolean bind;
 
-    public void setBind(boolean bind) {
-        this.bind = bind;
-    }
-
     public static void setDeviceCode(long deviceNo) {
         deviceCode = deviceNo;
-    }
-
-    public boolean getBind() {
-        return this.bind;
     }
 
     public static long getDeviceCode() {

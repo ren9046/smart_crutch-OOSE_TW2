@@ -7,7 +7,6 @@ public class WarningState implements HandLeavingAlert_State {
 
     public WarningState() {
         System.out.println("Warning state");
-        //MainActivity.setCountdown("change");
     }
 
     @Override
