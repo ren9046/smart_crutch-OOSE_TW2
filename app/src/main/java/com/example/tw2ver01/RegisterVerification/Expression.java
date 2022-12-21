@@ -1,4 +1,5 @@
 package com.example.tw2ver01.RegisterVerification;
+
 //帳號驗證器
 //第1種是@前面必須是英文加數字
 //地2種是@後面必須是 英文數字.英文數字(.英文數字)

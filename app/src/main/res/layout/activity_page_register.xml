@@ -38,7 +38,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="34dp"
-        android:text="電子信箱:"
+        android:text="@string/email"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/riptmail"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,7 +50,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="15dp"
-        android:text="確認密碼:"
+        android:text="@string/verifypassword"
         app:layout_constraintEnd_toStartOf="@+id/rcpwd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:layout_marginEnd="14dp"
-        android:text="電話:"
+        android:text="@string/phone_num"
         app:layout_constraintEnd_toStartOf="@+id/rphone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rphone" />
@@ -101,7 +101,7 @@
         android:layout_marginStart="87dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="16dp"
-        android:text="姓名:"
+        android:text="@string/name"
         app:layout_constraintEnd_toStartOf="@+id/rusername"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rusername" />
@@ -140,7 +140,7 @@
         android:layout_marginStart="87dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
-        android:text="密碼:"
+        android:text="@string/password"
         app:layout_constraintEnd_toStartOf="@+id/riptpwd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rphone" />
@@ -167,7 +167,7 @@
         android:layout_marginBottom="114dp"
         android:background="@drawable/login1_"
         android:fadeScrollbars="true"
-        android:text="REG"
+        android:text="@string/reg"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +179,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="73dp"
         android:layout_marginEnd="15dp"
-        android:text="機器碼:"
+        android:text="@string/device_code"
         app:layout_constraintEnd_toStartOf="@+id/rdeviceCode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rdeviceCode" />

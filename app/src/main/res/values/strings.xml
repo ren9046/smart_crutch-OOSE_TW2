@@ -18,5 +18,15 @@
     <string name="Account">Account</string>
     <string name="Password">Password</string>
     <string name="view_live_images">View live images</string>
+    <string name="stop">Stop</string>
+    <string name="email">Email :</string>
+    <string name="verifypassword">Verify Password :</string>
+    <string name="phone_num">Phone :</string>
+    <string name="name">Name :</string>
+    <string name="password">Password :</string>
+    <string name="reg">Register</string>
+    <string name="device_code">Device Code :</string>
+    <string name="heart_chart">Heartbeat chart in the past 20 minutes</string>
+    <string name="view_chart">view_chart</string>
 
 </resources>

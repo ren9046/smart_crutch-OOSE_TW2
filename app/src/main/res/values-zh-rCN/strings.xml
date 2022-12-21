@@ -19,4 +19,14 @@
     <string name="Account">帐号</string>
     <string name="Password">密码</string>
     <string name="view_live_images">查看即时影像</string>
+    <string name="stop">停止</string>
+    <string name="email">电子信箱 :</string>
+    <string name="name">姓名 :</string>
+    <string name="password">密码 :</string>
+    <string name="reg">注册</string>
+    <string name="device_code">机器码 :</string>
+    <string name="verifypassword">确认密码 :</string>
+    <string name="phone_num">电话 :</string>
+    <string name="heart_chart">近20分钟心跳折线图</string>
+    <string name="view_chart">查看心跳折线图</string>
 </resources>

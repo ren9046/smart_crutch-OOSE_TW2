@@ -16,7 +16,17 @@
     <string name="select_language">選擇一種語言</string>
     <string name="language">語言</string>
     <string name="createAccount">註冊</string>
-    <string name="Account">帳號</string>
-    <string name="Password">密碼</string>
+    <string name="Account">帳號 :</string>
+    <string name="Password">密碼 :</string>
     <string name="view_live_images">查看即時影像</string>
+    <string name="stop">停止</string>
+    <string name="email">電子信箱 :</string>
+    <string name="name">姓名 :</string>
+    <string name="password">密碼 :</string>
+    <string name="reg">註冊</string>
+    <string name="device_code">機器碼 :</string>
+    <string name="verifypassword">確認密碼 :</string>
+    <string name="phone_num">電話 :</string>
+    <string name="heart_chart">近20分鐘心跳折線圖</string>
+    <string name="view_chart">查看心跳折線圖</string>
 </resources>

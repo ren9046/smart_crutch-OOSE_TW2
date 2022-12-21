@@ -19,12 +19,22 @@ import com.example.tw2ver01.ButtonFunction.liveCommand;
 import com.example.tw2ver01.State.HandLeavingAlert_State;
 import com.example.tw2ver01.State.WorkingState;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+
 
 public class MainActivity extends AppCompatActivity {
-    protected static final int MSG_WHAT = 0;
+    LoginResponse loginResponse;
+    Button live, btngps, hebtbtn, stopbtn;
     public static HandLeavingAlert_State state = new WorkingState();
     public static String token = null;
     private static TextView timeleft;
@@ -32,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private static Timer timer;
     private static int time = 60;
     private static int isStop = 0;
-    private static String HBvalue;
+    private static Double HBvalue;
+    protected static final int MSG_WHAT = 0;
     private static final Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             countdown.setText(time + "sec");
@@ -42,7 +53,25 @@ public class MainActivity extends AppCompatActivity {
                         time--;
                     } else {
                         System.out.println("time out");
+                        //Toast.makeText(MainActivity.this, "倒计时完成", Toast.LENGTH_SHORT).show();
                         if (timer != null) {
+                            OkHttpClient client = new OkHttpClient();
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put("deviceCode", Device.getDeviceCode());
+                                jsonObject.put("state", 1);//Working true or false
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+                            RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
+                            Request request = new Request.Builder().url("http://20.194.172.51:80/api/Device/UpdateState").method("POST", body).build();
+                            try {
+                                client.newCall(request).execute();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             countdown.setText("Time out!");
                             timer.cancel();
                             timer = null;
@@ -55,27 +84,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    final Handler hand1 = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                Toast.makeText(getApplicationContext(), "登入成功", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "登入失敗", Toast.LENGTH_LONG).show();
-            }
-        }
-    };
-    LoginResponse loginResponse;
-    Button live, btngps, hebtbtn, stopbtn;
 
-    public static void setHBvalue(String h) {
+    public static void setHBvalue(Double h) {
         HBvalue = h;
         System.out.println(HBvalue);
     }
 
     public static void isDectect() {
         System.out.println("detecting");
-        if (HBvalue != null) { //有偵測到心跳
+        if (HBvalue >= 10.0) { //有偵測到心跳
             if (state.getStateType() == "Warning") {
                 state.switchState();//change to Working state
                 timer.cancel();
@@ -87,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             if (state.getStateType() == "Working") {
                 if (isStop != 1) { //還沒有按下Stop
                     state.switchState();//change to Warning state
+                    //if (timer == null) {
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
 
@@ -96,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             mHandler.sendEmptyMessage(MSG_WHAT);
                         }
                     }, 0, 1000);
+                    //}
                 }
             }
         }
@@ -184,5 +203,17 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Tag", "=====>" + loginResponse.getEmail());
         }
     }
+
+
+    final Handler hand1 = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                Toast.makeText(getApplicationContext(), "登入成功", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "登入失敗", Toast.LENGTH_LONG).show();
+            }
+        }
+    };
 }
 

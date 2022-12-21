@@ -43,7 +43,6 @@ public class BaseActivity extends AppCompatActivity {
 
     public void changeAppLanguage() {
         String sta = Store.getLanguageLocal(this);
-        System.out.println(sta);
         if (sta != null && !"".equals(sta)) {
             Language language = new Language(sta);
             Strategy selectEnglish = new SelectEnglish();

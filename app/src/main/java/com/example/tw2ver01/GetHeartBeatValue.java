@@ -12,8 +12,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GetHeartBeatValue extends AsyncTask<Void, Void, String> {
-    private static String value;
     OkHttpClient client = new OkHttpClient();
+    private static String value;
 
     @Override
     public String doInBackground(Void... voids) {
@@ -37,7 +37,7 @@ public class GetHeartBeatValue extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         if (result != null) {
             Double hbvalue = Math.round(Float.parseFloat(result) * 100.0) / 100.0;
-            MainActivity.setHBvalue(hbvalue.toString());
+            MainActivity.setHBvalue(hbvalue);
             MainActivity.isDectect();
         }
     }

@@ -33,7 +33,7 @@
         android:layout_marginTop="232dp"
         android:layout_marginEnd="160dp"
         android:onClick="stop"
-        android:text="Stop"
+        android:text="@string/stop"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

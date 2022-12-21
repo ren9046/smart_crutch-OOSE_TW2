@@ -3,9 +3,9 @@ package com.example.tw2ver01.Language;
 import java.util.Locale;
 
 public class Language {
+    private Strategy strategy;
     private final String country;
     private final String lang;
-    private Strategy strategy;
 
     public Language(String s) {
         this.lang = s.split("_")[0];

@@ -100,6 +100,7 @@ public class page_register extends AppCompatActivity {
                     registerRequest.setLineToken(rcall.getText().toString());
                     registerRequest.setContactNo(rphone.getText().toString());
                     registerRequest.setDeviceCode(Long.valueOf(rdeviceCode.getText().toString()));
+                    System.out.println(registerRequest.getJsonString());
 
                     registerUser(registerRequest);
                 }
@@ -115,6 +116,7 @@ public class page_register extends AppCompatActivity {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
 
                 if (response.isSuccessful()) {
+                    //String message = "Successful ..";
                     Toast.makeText(page_register.this, "Successful ..", Toast.LENGTH_LONG).show();
 
                     startActivity(new Intent(page_register.this, page_login.class));

@@ -132,7 +132,7 @@ public class page_chart extends AppCompatActivity {
         public static Image getShape(String shapeType) {
             Image image = null;
             if (shapeType.equalsIgnoreCase("chart")) {
-                image = shapeMap.get("chart");
+                image = (Chart) shapeMap.get("chart");
                 if (image == null) {
                     image = new Chart();
                     shapeMap.put("chart", image);
