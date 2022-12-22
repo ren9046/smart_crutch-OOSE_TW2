@@ -15,6 +15,7 @@ import okhttp3.Response;
 
 public class ChangeDeviceState extends AsyncTask<Void, Void, String> {
     final OkHttpClient client = new OkHttpClient();
+
     @Override
     protected String doInBackground(Void... voids) {
         JSONObject jsonObject = new JSONObject();
@@ -30,7 +31,7 @@ public class ChangeDeviceState extends AsyncTask<Void, Void, String> {
         Request request = new Request.Builder().url("http://20.194.172.51:80/api/Device/UpdateState").method("POST", body).build();
         try {
             Response response = client.newCall(request).execute();
-            System.out.println("response info:\n"+response);
+            System.out.println("response info:\n" + response);
         } catch (IOException e) {
             e.printStackTrace();
         }

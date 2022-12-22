@@ -2,7 +2,6 @@ package com.example.tw2ver01;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,37 +9,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tw2ver01.ButtonFunction.*;
-import com.example.tw2ver01.State.*;
+import com.example.tw2ver01.ButtonFunction.Command;
+import com.example.tw2ver01.ButtonFunction.btngpsCommand;
+import com.example.tw2ver01.ButtonFunction.hebtbtnCommand;
+import com.example.tw2ver01.ButtonFunction.liveCommand;
+import com.example.tw2ver01.State.HandLeavingAlert_State;
+import com.example.tw2ver01.State.WorkingState;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-
 
 public class MainActivity extends AppCompatActivity {
-    LoginResponse loginResponse;
-    Button live, btngps, hebtbtn, stopbtn;
+    protected static final int MSG_WHAT = 0;
     public static HandLeavingAlert_State state = new WorkingState();
     private static TextView timeleft;
     private static TextView countdown;
     private static Timer timer;
     private static int time = 10;
     private static boolean isStop = false;
-    private static Double HBvalue;
-    protected static final int MSG_WHAT = 0;
     private static final Handler mHandler = new Handler() {
         @SuppressLint("HandlerLeak")
         public void handleMessage(Message msg) {
@@ -54,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                         if (timer != null) {
                             countdown.setText("Time out!");
                             Device.setState(isStop);
-                            //System.out.println("Device State:"+Device.isState());
                             new ChangeDeviceState().execute();
                             timer.cancel();
                             time = 60;
@@ -68,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    private static Double HBvalue;
+    LoginResponse loginResponse;
+    Button live, btngps, hebtbtn, stopbtn;
 
     public static void setHBvalue(Double h) {
         HBvalue = h;
@@ -107,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void stop(View view) {
         if (state.getStateType() == "Warning" && !isStop) {
-            if (timer == null){
+            if (timer == null) {
                 countdown.setText("Send Message to family");
                 System.out.println("send message");
-            }else{
+            } else {
                 timer.cancel();
                 timer = null;
                 time = 60;
@@ -127,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             countdown.setText("Loading...");
         } else if (state.getStateType() == "Working" && !isStop) {
             System.out.println("Do nothing");
-        }else if (state.getStateType()=="Warning" && isStop){
+        } else if (state.getStateType() == "Warning" && isStop) {
             state.switchState(); //change to working state
             stopbtn.setText("Stop");
             isStop = false;

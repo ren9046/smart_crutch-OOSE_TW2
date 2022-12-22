@@ -12,8 +12,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GetHeartBeatValue extends AsyncTask<Void, Void, String> {
-    OkHttpClient client = new OkHttpClient();
     private static String value;
+    OkHttpClient client = new OkHttpClient();
 
     @Override
     public String doInBackground(Void... voids) {

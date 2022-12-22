@@ -24,12 +24,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class page_maps1 extends FragmentActivity implements OnMapReadyCallback {
+    private final String http = "http://20.194.172.51";
     OkHttpClient client = new OkHttpClient();
-
     private GoogleMap mMap;
     private ActivityPageMaps1Binding binding;
     private Double longitude, latitude;
-    private final String http = "http://20.194.172.51";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

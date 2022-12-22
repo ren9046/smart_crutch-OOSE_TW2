@@ -38,7 +38,7 @@ public class page_chart extends AppCompatActivity {
         chart = findViewById(R.id.lineChart);  //取得圖表
         new heartvalueget().execute();
         FlyweightFactory factory = new FlyweightFactory();
-        Chart chart = (Chart) factory.getShape("chart");
+        Chart chart = (Chart) FlyweightFactory.getShape("chart");
         chart.draw();
 
     }
@@ -131,7 +131,7 @@ public class page_chart extends AppCompatActivity {
         public static Image getShape(String shapeType) {
             Image image = null;
             if (shapeType.equalsIgnoreCase("chart")) {
-                image = (Chart) shapeMap.get("chart");
+                image = shapeMap.get("chart");
                 if (image == null) {
                     image = new Chart();
                     shapeMap.put("chart", image);

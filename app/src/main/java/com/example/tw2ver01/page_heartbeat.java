@@ -19,7 +19,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class page_heartbeat extends AppCompatActivity {
-    private String value, result;
+    private String value;
     private Handler handler;
     private TextView heartoutcome;
     private GetHeartBeatValue getHeartBeat;

@@ -14,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tw2ver01.Alert.LoginAlert;
-import com.example.tw2ver01.Language.*;
+import com.example.tw2ver01.Language.BaseActivity;
+import com.example.tw2ver01.Language.Config;
+import com.example.tw2ver01.Language.LanguageUtils;
+import com.example.tw2ver01.Language.Store;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,7 +111,6 @@ public class page_login extends BaseActivity {
                                             .build();
                                     try (Response rp = client.newCall(re).execute()) {
                                         if (rp.code() == 200) {
-
                                             String result1 = rp.body().string();
                                             System.out.println(result1);
                                         }

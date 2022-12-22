@@ -12,11 +12,9 @@ public class RegisterRequest {
     private Long deviceCode;
 
 
-
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
     }
-
 
 
     public void setEmail(String email) {
@@ -29,11 +27,9 @@ public class RegisterRequest {
     }
 
 
-
     public void setContactNo(String contactNo) {
         this.contactNumber = contactNo;
     }
-
 
 
     public void setLineToken(String LineToken) {
