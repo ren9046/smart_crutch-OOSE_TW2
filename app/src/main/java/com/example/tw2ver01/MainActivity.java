@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static TextView timeleft;
     private static TextView countdown;
     private static Timer timer;
-    private static int time = 10;
+    private static int time = 60;
     private static boolean isStop = false;
     private static final Handler mHandler = new Handler() {
         @SuppressLint("HandlerLeak")
