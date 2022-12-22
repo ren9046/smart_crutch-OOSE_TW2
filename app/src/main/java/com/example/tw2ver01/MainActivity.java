@@ -1,6 +1,8 @@
 package com.example.tw2ver01;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private static TextView timeleft;
     private static TextView countdown;
     private static Timer timer;
-    private static int time = 60;
-    private static int isStop = 0;
+    private static int time = 10;
+    private static boolean isStop = false;
     private static Double HBvalue;
     protected static final int MSG_WHAT = 0;
     private static final Handler mHandler = new Handler() {
+        @SuppressLint("HandlerLeak")
         public void handleMessage(Message msg) {
             countdown.setText(time + "sec");
             switch (msg.what) {
@@ -49,25 +52,12 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         System.out.println("time out");
                         if (timer != null) {
-                            OkHttpClient client = new OkHttpClient();
-                            JSONObject jsonObject = new JSONObject();
-                            try {
-                                jsonObject.put("deviceCode", Device.getDeviceCode());
-                                jsonObject.put("state", 1);//Working true or false
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-                            RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
-                            Request request = new Request.Builder().url("http://20.194.172.51:80/api/Device/UpdateState").method("POST", body).build();
-                            try {
-                                client.newCall(request).execute();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
                             countdown.setText("Time out!");
+                            Device.setState(isStop);
+                            //System.out.println("Device State:"+Device.isState());
+                            new ChangeDeviceState().execute();
                             timer.cancel();
+                            time = 60;
                             timer = null;
                         }
                     }
@@ -90,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
             if (state.getStateType() == "Warning") {
                 state.switchState();//change to Working state
                 timer.cancel();
-                isStop = 0;
+                isStop = false;
             } else if (state.getStateType() == "Working") {
                 countdown.setText("Heartbeat Detecting...");
             }
         } else { //沒有偵測到心跳
             if (state.getStateType() == "Working") {
-                if (isStop != 1) { //還沒有按下Stop
+                if (!isStop) { //還沒有按下Stop
                     state.switchState();//change to Warning state
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
@@ -116,22 +106,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void stop(View view) {
-        if (state.getStateType() == "Warning" && isStop == 0) {
-            isStop = 1;
-            timer.cancel();
-            timer = null;
-            time = 60;
-            state.switchState();//change to working state
-            countdown.setText("Stop Using crutch");
-            System.out.println("Stop");
+        if (state.getStateType() == "Warning" && !isStop) {
+            if (timer == null){
+                countdown.setText("Send Message to family");
+                System.out.println("send message");
+            }else{
+                timer.cancel();
+                timer = null;
+                time = 60;
+                state.switchState();//change to working state
+                countdown.setText("Stop Using crutch");
+                System.out.println("Stop");
+            }
+            isStop = true;
             stopbtn.setText("Restart");
-        } else if (state.getStateType() == "Working" && isStop == 1) {
-            isStop = 0;
+        } else if (state.getStateType() == "Working" && isStop) {
+            isStop = false;
             stopbtn.setText("Stop");
             System.out.println("Restart");
             countdown.setText("Loading...");
-        } else if (state.getStateType() == "Working" && isStop == 0) {
+        } else if (state.getStateType() == "Working" && !isStop) {
             System.out.println("Do nothing");
+        }else if (state.getStateType()=="Warning" && isStop){
+            state.switchState(); //change to working state
+            stopbtn.setText("Stop");
+            isStop = false;
+            countdown.setText("Loading...");
         }
     }
 
