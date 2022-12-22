@@ -3,6 +3,7 @@ package com.example.tw2ver01;
 public class Device {
     private static long deviceCode;
     private boolean bind;
+    private boolean state;
 
     public static void setDeviceCode(long deviceNo) {
         deviceCode = deviceNo;

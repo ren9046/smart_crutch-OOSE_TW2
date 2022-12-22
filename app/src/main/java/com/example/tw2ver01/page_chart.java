@@ -37,7 +37,8 @@ public class page_chart extends AppCompatActivity {
         setContentView(R.layout.activity_page_chart); //取得介面
         chart = findViewById(R.id.lineChart);  //取得圖表
         new heartvalueget().execute();
-        Chart chart = (Chart) FlyweightFactory.getShape("chart");
+        FlyweightFactory factory = new FlyweightFactory();
+        Chart chart = (Chart) factory.getShape("chart");
         chart.draw();
 
     }
