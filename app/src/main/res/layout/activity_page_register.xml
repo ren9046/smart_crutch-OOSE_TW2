@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/messageimage_1653921587477"
+    android:background="@drawable/register_background"
     tools:context=".page_register">
 
     <EditText
@@ -165,7 +165,7 @@
         android:layout_width="150dp"
         android:layout_height="44dp"
         android:layout_marginBottom="114dp"
-        android:background="@drawable/login1_"
+        android:background="@drawable/button_background"
         android:fadeScrollbars="true"
         android:text="@string/reg"
         android:textColor="@color/white"

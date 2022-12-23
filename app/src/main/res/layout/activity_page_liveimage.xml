@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/messageimage_1654271756017"
+    android:background="@drawable/i_back"
     tools:context=".page_Liveimage">
 
     <Button
         android:id="@+id/button2"
         android:layout_width="160dp"
         android:layout_height="56dp"
-        android:background="@drawable/login1_"
+        android:background="@drawable/button_background"
         android:text="@string/view_live_images"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

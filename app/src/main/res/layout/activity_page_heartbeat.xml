@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/messageimage_1653579565295"
+    android:background="@drawable/heart_background"
     tools:context=".page_heartbeat">
 
     <TextView
@@ -26,7 +26,7 @@
         android:id="@+id/button4"
         android:layout_width="283dp"
         android:layout_height="58dp"
-        android:background="@drawable/login1_"
+        android:background="@drawable/button_background"
         android:text="@string/view_chart"
         android:textColor="#C8E6C9"
         app:layout_constraintBottom_toBottomOf="parent"

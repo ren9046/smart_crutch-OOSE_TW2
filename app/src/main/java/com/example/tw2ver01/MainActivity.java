@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
             } else if (state.getStateType() == "Working") {
                 countdown.setText("Heartbeat Detecting...");
             }
+            if(!Device.isState()){
+                Device.setState(true);
+                new ChangeDeviceState().execute();
+            }
         } else { //沒有偵測到心跳
             if (state.getStateType() == "Working") {
                 if (!isStop) { //還沒有按下Stop
